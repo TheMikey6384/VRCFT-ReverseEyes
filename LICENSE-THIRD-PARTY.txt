@@ -1,6 +1,4 @@
-===========================
-
-# SharpOSC
+SharpOSC
 
 Copyright (c) 2012 Valdemar Örn Erlingsson
 
