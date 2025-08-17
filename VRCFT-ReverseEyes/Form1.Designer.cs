@@ -38,12 +38,13 @@
             this.startBTN = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.pimaxFixToggle = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // extensiveLog
             // 
             this.extensiveLog.AutoSize = true;
-            this.extensiveLog.Location = new System.Drawing.Point(192, 124);
+            this.extensiveLog.Location = new System.Drawing.Point(204, 154);
             this.extensiveLog.Name = "extensiveLog";
             this.extensiveLog.Size = new System.Drawing.Size(164, 24);
             this.extensiveLog.TabIndex = 0;
@@ -130,11 +131,25 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "Outbound (To VRC)";
             // 
+            // pimaxFixToggle
+            // 
+            this.pimaxFixToggle.AutoSize = true;
+            this.pimaxFixToggle.Checked = true;
+            this.pimaxFixToggle.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.pimaxFixToggle.Location = new System.Drawing.Point(204, 119);
+            this.pimaxFixToggle.Name = "pimaxFixToggle";
+            this.pimaxFixToggle.Size = new System.Drawing.Size(99, 24);
+            this.pimaxFixToggle.TabIndex = 10;
+            this.pimaxFixToggle.Text = "Flip Eyes";
+            this.pimaxFixToggle.UseVisualStyleBackColor = true;
+            this.pimaxFixToggle.CheckedChanged += new System.EventHandler(this.pimaxFixToggle_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(499, 181);
+            this.Controls.Add(this.pimaxFixToggle);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.startBTN);
@@ -164,6 +179,7 @@
         private System.Windows.Forms.Button startBTN;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox pimaxFixToggle;
     }
 }
 

@@ -78,7 +78,7 @@ namespace VRCFT_ReverseEyes
 
             bool pimaxFixed = false;
             Form1 forms = Application.OpenForms.OfType<Form1>().FirstOrDefault();
-            //if (forms.pimaxFix == true)
+            if (forms.pimaxFixed == true)
             {
 
                 var modifiedMessages = new List<OscMessage>();
@@ -192,9 +192,9 @@ namespace VRCFT_ReverseEyes
 
 
             }
-            //else
+            else
             {
-                //SendOSCPacketFT(originalBundle);
+                SendOSCPacketFT(originalBundle);
             }
 
         }
