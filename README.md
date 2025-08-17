@@ -19,7 +19,7 @@ Sharp OSC
 
 https://github.com/ValdemarOrn/SharpOSC
 
-VRCFT
+VRCFT (No Assets Used In Project)
 
 https://github.com/benaclejames/VRCFaceTracking
 
