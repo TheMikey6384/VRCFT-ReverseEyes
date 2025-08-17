@@ -13,13 +13,13 @@ How to Use
 2. Set IP/Port Destination for VRChat
 3. Hit Start
  
-Credits
+# Credits
 
-## Sharp OSC
+Sharp OSC
 
 https://github.com/ValdemarOrn/SharpOSC
 
-## VRCFT
+VRCFT
 
 https://github.com/benaclejames/VRCFaceTracking
 
