@@ -10,7 +10,7 @@ How to Use
 1. Set Output Port on VRCFT to "In Port" specified.
 <img width="1507" height="544" alt="image" src="https://github.com/user-attachments/assets/3114a696-3b9b-4c73-8d23-220f38b174a0" />
 
-2. Set IP/Port Destination for VRChat 3.
+2. Set IP/Port Destination for VRChat
 3. Hit Start
  
 Credits
