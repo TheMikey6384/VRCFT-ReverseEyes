@@ -123,14 +123,25 @@ namespace VRCFT_ReverseEyes
             }
             
         }
+        //static void HandleFTOscMessage(OscPacket packet)
+        //{
+
+        //    var messageReceived = (OscBundle)packet;
+        //    if (packet is OscBundle bundle)
+        //    {
+        //        CreateModifiedBundle(messageReceived);
+        //    }
+        //}
         static void HandleFTOscMessage(OscPacket packet)
         {
-
-            var messageReceived = (OscBundle)packet;
             if (packet is OscBundle bundle)
             {
-                CreateModifiedBundle(messageReceived);
-
+                CreateModifiedBundle(bundle);
+            }
+            else if (packet is OscMessage message)
+            {
+                SendOSCPacketFT(packet);
+                Console.WriteLine($"Packet is a message: {message.Address}");
             }
         }
         static void CreateModifiedBundle(OscBundle originalBundle)
