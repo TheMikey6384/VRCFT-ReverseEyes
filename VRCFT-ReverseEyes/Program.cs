@@ -140,8 +140,10 @@ namespace VRCFT_ReverseEyes
             }
             else if (packet is OscMessage message)
             {
-                SendOSCPacketFT(packet);
+                //SendOSCPacketFT(packet);
                 Console.WriteLine($"Packet is a message: {message.Address}");
+
+                FlipEyesFromMessage(message, false);
             }
         }
         static void CreateModifiedBundle(OscBundle originalBundle)
@@ -152,7 +154,7 @@ namespace VRCFT_ReverseEyes
 
             try
             {
-                bool pimaxFixed = false;
+                
 
 
                 Form1 forms = Application.OpenForms.OfType<Form1>().FirstOrDefault();
@@ -160,7 +162,7 @@ namespace VRCFT_ReverseEyes
                 if (forms.pimaxFixed == true)
                 {
 
-                    var modifiedMessages = new List<OscMessage>();
+                    
                     //pimaxFixed = false;
                     foreach (var packet in originalBundle.Messages)
                     {
@@ -169,103 +171,9 @@ namespace VRCFT_ReverseEyes
                             //if (msg.Arguments.Count > 0 && msg.Arguments[0] is string originalText)
                             //{
                             //Console.WriteLine(msg.Address);
-                            string originalText = msg.Address;
-                            string modifiedText = originalText;
 
-                            pimaxFixed = false;
-
-
-                            if (originalText.Contains("Right") && originalText.Contains("Eye"))
-                            {
-
-                                modifiedText = originalText.Replace("Right", "Left");
-                                pimaxFixed = true;
-
-                                if (extensiveLog)
-                                {
-                                    Console.ForegroundColor = ConsoleColor.Cyan;
-                                    Console.WriteLine("Switched From R To L: " + msg.Address + " Value: " + msg.Arguments[0]);
-                                    Console.ForegroundColor = ConsoleColor.White;
-                                }
-
-                            }
-                            if (originalText.Contains("Right") && originalText.Contains("Brow"))
-                            {
-
-                                modifiedText = originalText.Replace("Right", "Left");
-                                pimaxFixed = true;
-
-                                if (extensiveLog)
-                                {
-                                    Console.ForegroundColor = ConsoleColor.Cyan;
-                                    Console.WriteLine("Switched From R To L: " + msg.Address + " Value: " + msg.Arguments[0]);
-                                    Console.ForegroundColor = ConsoleColor.White;
-                                }
-                            }
-
-                            if (originalText.Contains("Left") && originalText.Contains("Eye"))
-                            {
-
-                                modifiedText = originalText.Replace("Left", "Right");
-                                pimaxFixed = true;
-
-                                if (extensiveLog)
-                                {
-                                    Console.ForegroundColor = ConsoleColor.Cyan;
-                                    Console.WriteLine("Switched From R To L: " + msg.Address + " Value: " + msg.Arguments[0]);
-                                    Console.ForegroundColor = ConsoleColor.White;
-                                }
-                            }
-                            if (originalText.Contains("Left") && originalText.Contains("Brow"))
-                            {
-
-                                modifiedText = originalText.Replace("Left", "Right");
-                                pimaxFixed = true;
-
-                                if (extensiveLog)
-                                {
-                                    Console.ForegroundColor = ConsoleColor.Cyan;
-                                    Console.WriteLine("Switched From R To L: " + msg.Address + " Value: " + msg.Arguments[0]);
-                                    Console.ForegroundColor = ConsoleColor.White;
-                                }
-                            }
-
-
-                            var newMsg = new OscMessage(modifiedText, msg.Arguments[0]);
-
-                            modifiedMessages.Add(newMsg);
-                            //}
-                            //else
-                            //{
-                            //    modifiedMessages.Add(msg);
-                            //}
-
-                            if (pimaxFixed)
-                            {
-                                // Use the correct constructor: create a new bundle from the message list
-                                ulong timestamp = GetCurrentOscTimeTag();
-                                var bund = new OscBundle(timestamp, modifiedMessages.ToArray());
-                                //if(forms.smoothEye)
-                                {
-                                    //SendOSCPacketFT(SmoothedPacket(bund));
-                                }
-                                // else
-                                {
-                                    SendOSCPacketFT(bund);
-                                }
-
-                            }
-                            else
-                            {
-                                if (extensiveLog)
-                                {
-                                    Console.WriteLine("Unchanged: " + msg.Address + " Value: " + msg.Arguments[0]);
-                                }
-                                //SendOSCPacketFT(originalBundle);
-                                //Console.ForegroundColor = ConsoleColor.Green;
-                                //Console.WriteLine(msg.Address);
-                                //Console.ForegroundColor = ConsoleColor.White;
-                            }
+                            FlipEyesFromMessage(msg, true);
+                            
                         }
                     }
 
@@ -299,6 +207,133 @@ namespace VRCFT_ReverseEyes
 
             
 
+        }
+        public static void FlipEyesFromMessage(OscMessage msg, bool fromBundle)
+        {
+            var modifiedMessages = new List<OscMessage>();
+            bool pimaxFixed = false;
+            string originalText = msg.Address;
+            string modifiedText = originalText;
+
+            pimaxFixed = false;
+
+
+            if (originalText.Contains("Right") && originalText.Contains("Eye"))
+            {
+
+                modifiedText = originalText.Replace("Right", "Left");
+                pimaxFixed = true;
+
+                if (extensiveLog)
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("Switched From R To L: " + msg.Address + " Value: " + msg.Arguments[0]);
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+
+            }
+            if (originalText.Contains("Right") && originalText.Contains("Brow"))
+            {
+
+                modifiedText = originalText.Replace("Right", "Left");
+                pimaxFixed = true;
+
+                if (extensiveLog)
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("Switched From R To L: " + msg.Address + " Value: " + msg.Arguments[0]);
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+
+            if (originalText.Contains("Left") && originalText.Contains("Eye"))
+            {
+
+                modifiedText = originalText.Replace("Left", "Right");
+                pimaxFixed = true;
+
+                if (extensiveLog)
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("Switched From R To L: " + msg.Address + " Value: " + msg.Arguments[0]);
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+            if (originalText.Contains("Left") && originalText.Contains("Brow"))
+            {
+
+                modifiedText = originalText.Replace("Left", "Right");
+                pimaxFixed = true;
+
+                if (extensiveLog)
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("Switched From R To L: " + msg.Address + " Value: " + msg.Arguments[0]);
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+
+
+            var newMsg = new OscMessage(modifiedText, msg.Arguments[0]);
+
+
+            if (fromBundle)
+            {
+                modifiedMessages.Add(newMsg);
+            }
+            
+            //}
+            //else
+            //{
+            //    modifiedMessages.Add(msg);
+            //}
+
+            if (pimaxFixed)
+            {
+                // Use the correct constructor: create a new bundle from the message list
+                if(fromBundle)
+                {
+                    ulong timestamp = GetCurrentOscTimeTag();
+                    var bund = new OscBundle(timestamp, modifiedMessages.ToArray());
+                    //if(forms.smoothEye)
+                    {
+                        //SendOSCPacketFT(SmoothedPacket(bund));
+                    }
+                    // else
+                    {
+                        SendOSCPacketFT(bund);
+                    }
+                }
+                else
+                {
+                    SendOSCPacketFT(newMsg);
+                }
+                
+
+            }
+            else
+            {
+                
+                if (!fromBundle)
+                {
+                    SendOSCPacketFT(msg);
+                    if (extensiveLog)
+                    {
+                        Console.WriteLine("Unchanged Message: " + msg.Address + " Value: " + msg.Arguments[0]);
+                    }
+                }
+                else
+                {
+                    if (extensiveLog)
+                    {
+                        Console.WriteLine("Unchanged Bundle: " + msg.Address + " Value: " + msg.Arguments[0]);
+                    }
+                }
+                //SendOSCPacketFT(originalBundle);
+                //Console.ForegroundColor = ConsoleColor.Green;
+                //Console.WriteLine(msg.Address);
+                //Console.ForegroundColor = ConsoleColor.White;
+            }
         }
         public static ulong GetCurrentOscTimeTag()
         {
