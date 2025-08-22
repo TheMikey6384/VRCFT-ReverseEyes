@@ -39,6 +39,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.pimaxFixToggle = new System.Windows.Forms.CheckBox();
+            this.delayTxtBX = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.delLogsBTN = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // extensiveLog
@@ -144,11 +147,42 @@
             this.pimaxFixToggle.UseVisualStyleBackColor = true;
             this.pimaxFixToggle.CheckedChanged += new System.EventHandler(this.pimaxFixToggle_CheckedChanged);
             // 
+            // delayTxtBX
+            // 
+            this.delayTxtBX.Location = new System.Drawing.Point(229, 190);
+            this.delayTxtBX.Name = "delayTxtBX";
+            this.delayTxtBX.Size = new System.Drawing.Size(100, 26);
+            this.delayTxtBX.TabIndex = 11;
+            this.delayTxtBX.Text = "1";
+            this.delayTxtBX.TextChanged += new System.EventHandler(this.delayTxtBX_TextChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(136, 190);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(84, 20);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Delay(ms):";
+            // 
+            // delLogsBTN
+            // 
+            this.delLogsBTN.Location = new System.Drawing.Point(15, 184);
+            this.delLogsBTN.Name = "delLogsBTN";
+            this.delLogsBTN.Size = new System.Drawing.Size(112, 32);
+            this.delLogsBTN.TabIndex = 13;
+            this.delLogsBTN.Text = "Delete Logs";
+            this.delLogsBTN.UseVisualStyleBackColor = true;
+            this.delLogsBTN.Click += new System.EventHandler(this.delLogsBTN_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(499, 181);
+            this.ClientSize = new System.Drawing.Size(499, 233);
+            this.Controls.Add(this.delLogsBTN);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.delayTxtBX);
             this.Controls.Add(this.pimaxFixToggle);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -180,6 +214,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox pimaxFixToggle;
+        private System.Windows.Forms.TextBox delayTxtBX;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button delLogsBTN;
     }
 }
 

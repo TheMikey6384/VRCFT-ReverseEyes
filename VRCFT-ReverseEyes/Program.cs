@@ -49,6 +49,7 @@ namespace VRCFT_ReverseEyes
         static UDPSender oscSender;
         static UDPListener oscReciever;
         public static bool extensiveLog;
+        public static string currLogName;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -57,6 +58,7 @@ namespace VRCFT_ReverseEyes
         {
             string timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
             string logFile = $"log_{timestamp}.txt";
+            currLogName = logFile;
 
             Console.SetOut(new DualWriter(Console.Out, logFile));
 
@@ -123,27 +125,77 @@ namespace VRCFT_ReverseEyes
             }
             
         }
-        //static void HandleFTOscMessage(OscPacket packet)
+        //static void HandleFTOscMessage1(OscPacket packet)
         //{
-
-        //    var messageReceived = (OscBundle)packet;
+        //    Form1 forms = Application.OpenForms.OfType<Form1>().FirstOrDefault();
         //    if (packet is OscBundle bundle)
         //    {
-        //        CreateModifiedBundle(messageReceived);
+        //        if (forms.pimaxFixed)
+        //        {
+        //            HandleFTOscMessage(bundle);
+        //        }
+        //        else
+        //        {
+        //            SendOSCPacketFT(packet);
+        //        }
+
+        //    }
+        //    else if (packet is OscMessage message)
+        //    {
+        //        //SendOSCPacketFT(packet);
+        //        Console.WriteLine($"Packet is a message: {message.Address}");
+
+        //        if (forms.pimaxFixed)
+        //        {
+        //            FlipEyesFromMessage(message, false);
+        //        }
+        //        else
+        //        {
+        //            SendOSCPacketFT(packet);
+        //        }
+
         //    }
         //}
+        public static DateTime lastTrack;
         static void HandleFTOscMessage(OscPacket packet)
         {
+            Form1 forms = Application.OpenForms.OfType<Form1>().FirstOrDefault();
             if (packet is OscBundle bundle)
             {
-                CreateModifiedBundle(bundle);
+                if(forms.pimaxFixed)
+                {
+                    if(DateTime.Now >  lastTrack.AddMilliseconds(forms.delay))
+                    {
+                        CreateModifiedBundle(bundle);
+                        lastTrack = DateTime.Now;
+                    }
+                    
+                }
+                else
+                {
+                    SendOSCPacketFT(packet);
+                }
+                    
             }
             else if (packet is OscMessage message)
             {
                 //SendOSCPacketFT(packet);
                 Console.WriteLine($"Packet is a message: {message.Address}");
 
-                FlipEyesFromMessage(message, false);
+                if(forms.pimaxFixed)
+                {
+                    if (DateTime.Now > lastTrack.AddMilliseconds(forms.delay))
+                    {
+                        FlipEyesFromMessage(message, false);
+                        lastTrack = DateTime.Now;
+                    }
+                        
+                }
+                else
+                {
+                    SendOSCPacketFT(packet);
+                }
+                    
             }
         }
         static void CreateModifiedBundle(OscBundle originalBundle)
